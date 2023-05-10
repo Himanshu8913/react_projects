@@ -5,35 +5,32 @@ function ToDo() {
     const [task, setTask] = useState("");
     const [todos, setTodos] = useState(['Complete Todo app', 'Complete 1 section']);
 
-    const createTodoHandler = () => {
+    const createTodoHandler = (event) => {
+        event.preventDefault();
+        
         setTodos(pervTodos => {
             setTask('');
             return [...pervTodos, task]
         })
     };
 
-    const checkForEnterKeyHandler = (event) => {
-        // console.log("Enter key", event);
-        if(event.keyCode === 13)
-            createTodoHandler();
-    };
-
     return (
         <div >
             <h1> To Do Application </h1>
-            <input
-                onKeyDown={checkForEnterKeyHandler}
-                type="text"
-                value={task}
-                onChange={event => {
-                    setTask(event.target.value)
-                }}
-            />
-            <button onClick={createTodoHandler}>Create Todo</button>
+            <form onSubmit={createTodoHandler}>
+                <input
+                    type="text"
+                    value={task}
+                    onChange={event => {
+                        setTask(event.target.value)
+                    }}
+                />
+                <button type="submit">Create Todo</button>
+            </form>
 
             <ul>
-                {todos.map(todo => {
-                    return <li>{todo}</li>
+                {todos.map((todo, index) => {
+                    return <li key={index}>{todo}</li>
                 })}
             </ul>
         </div>
