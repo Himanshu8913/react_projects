@@ -7,16 +7,28 @@ function ToDo() {
 
     const createTodoHandler = () => {
         setTodos(pervTodos => {
+            setTask('');
             return [...pervTodos, task]
         })
-    }
+    };
+
+    const checkForEnterKeyHandler = (event) => {
+        // console.log("Enter key", event);
+        if(event.keyCode === 13)
+            createTodoHandler();
+    };
+
     return (
         <div >
             <h1> To Do Application </h1>
-            <input type="text" value={task}
-            onChange={event => {
-                setTask(event.target.value)
-            }} />
+            <input
+                onKeyDown={checkForEnterKeyHandler}
+                type="text"
+                value={task}
+                onChange={event => {
+                    setTask(event.target.value)
+                }}
+            />
             <button onClick={createTodoHandler}>Create Todo</button>
 
             <ul>
