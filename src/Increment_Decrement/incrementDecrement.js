@@ -5,11 +5,14 @@ function IncrementDecrement() {
     const [counter, setCounter] = useState(0);
 
     const increment = () => {
-        setCounter(counter + 1);
+        //setCounter((prevCounter) => prevCounter + 1);
+        setCounter(function(prevCounter) {
+            return prevCounter + 1;
+        });
     }
 
     const decrement = () => {
-        setCounter(counter - 1);
+        setCounter((prevCounter) => prevCounter - 1);
     }
 
     return (
