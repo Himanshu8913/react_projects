@@ -1,40 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 function ToDo() {
 
-    const [task, setTask] = useState("");
-    const [todos, setTodos] = useState(['Complete Todo app', 'Complete 1 section']);
+    const [task, setTask] = useState('')
 
-    const createTodoHandler = (event) => {
-        event.preventDefault();
-        
-        setTodos(pervTodos => {
-            setTask('');
-            return [...pervTodos, task]
-        })
-    };
+    const [todos, setTodos] = useState([])
+
+    function addItemHandler(e) {
+        if (e) {
+            e.preventDefault();
+            if (task === "") {
+                alert('Enter a task first')
+            } else {
+                setTodos([...todos, task]);
+                setTask('')
+            }
+        } else {
+            setTodos([...todos])
+        }
+    }
+
+    function deleteItemHandler(index) {
+        todos.splice(index, 1)
+        addItemHandler();
+    }
+
 
     return (
-        <div >
-            <h1> To Do Application </h1>
-            <form onSubmit={createTodoHandler}>
+        <div className="App">
+            <form onSubmit={addItemHandler}>
                 <input
                     type="text"
+                    placeholder='write a todo...'
                     value={task}
-                    onChange={event => {
-                        setTask(event.target.value)
-                    }}
-                />
-                <button type="submit">Create Todo</button>
-            </form>
+                    onChange={(e) => { setTask(e.target.value) }} />
 
+                <button type='submit'> Add Item </button>
+            </form>
             <ul>
                 {todos.map((todo, index) => {
-                    return <li key={index}>{todo}</li>
+                    return (
+                        <div>
+                            <li >{todo}</li>
+                            <button onClick={() => deleteItemHandler(index)}>Delete</button>
+                        </div>
+                    )
                 })}
             </ul>
         </div>
     )
-}
 
+}
 export default ToDo;

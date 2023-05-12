@@ -7,10 +7,9 @@ import ToDo from './ToDo/ToDo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-    {/* <IncrementDecrement /> */}
-    {/* <QuoteGenerator /> */}
-    <ToDo />
-  </React.StrictMode>
+  
+    <App >
+    // {/* <IncrementDecrement /> */}
+    // {/* <QuoteGenerator /> */}
+    <ToDo /></App>
 );
